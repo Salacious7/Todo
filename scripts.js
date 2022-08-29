@@ -1,6 +1,7 @@
 let button = document.getElementById('create-task-button')
 let list = document.getElementById('task-list')
 let taskText = document.getElementById('create-task-text')
+let clear = document.getElementById('clear-button')
 let todos = JSON.parse(localStorage.getItem("todos"))
 let todosObj = []
 
@@ -8,14 +9,15 @@ if (localStorage.getItem('todos')) {
     todosObj = JSON.parse(localStorage.getItem('todos'));
 }
 
-button.addEventListener('click', OnClickTaskButton)
+clear.addEventListener('click', ClearTasks)
+button.addEventListener('click', AddTask)
 taskText.addEventListener('keypress', function(e)
 {
     if (e.key === "Enter") 
-        OnClickTaskButton
+        AddTask
 })
 
-function OnClickTaskButton()
+function AddTask()
 {
     if(taskText.value == '')
         return
@@ -42,6 +44,14 @@ function OnClickTaskButton()
     taskText.value = null
 }
 
+function ClearTasks()
+{
+    todosObj = []
+    list.innerHTML = ''
+    localStorage.clear()
+
+}
+
 window.onload=function()
 {
     list.innerHTML = ''
@@ -50,7 +60,7 @@ window.onload=function()
     {
         for(let i = 0; i < todos.length; i++)
         {      
-            list.innerHTML += `${todos[i]}`
+            list.innerHTML += `<li id="task">${todos[i]}</li>`
         }
     }
 }
