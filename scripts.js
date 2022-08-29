@@ -1,15 +1,15 @@
-let buttonId = document.getElementById('create-task-button')
-let listId = document.getElementById('task-list')
-let newListText = document.getElementById('create-task-text')
+let button = document.getElementById('create-task-button')
+let list = document.getElementById('task-list')
+let taskText = document.getElementById('create-task-text')
 let todos = JSON.parse(localStorage.getItem("todos"))
-let todosArr = []
+let todosObj = []
 
 if (localStorage.getItem('todos')) {
-    todosArr = JSON.parse(localStorage.getItem('todos'));
+    todosObj = JSON.parse(localStorage.getItem('todos'));
 }
 
-buttonId.addEventListener('click', OnClickTaskButton)
-newListText.addEventListener('keypress', function(e)
+button.addEventListener('click', OnClickTaskButton)
+taskText.addEventListener('keypress', function(e)
 {
     if (e.key === "Enter") 
         OnClickTaskButton
@@ -17,40 +17,40 @@ newListText.addEventListener('keypress', function(e)
 
 function OnClickTaskButton()
 {
-    if(newListText.value == '')
+    if(taskText.value == '')
         return
 
-    newListText.value = newListText.value.charAt(0).toUpperCase() + newListText.value.slice(1)
+    taskText.value = taskText.value.charAt(0).toUpperCase() + taskText.value.slice(1)
 
-    let newCheckbox = document.createElement('input')
-    newCheckbox.type = 'checkbox'
-    newCheckbox.id = 'task-check'
+    let checkbox = document.createElement('input')
+    checkbox.type = 'checkbox'
+    checkbox.id = 'task-check'
 
-    let newListObj = document.createElement('li')
-    newListObj.id = 'task'
+    let listObj = document.createElement('li')
+    listObj.id = 'task'
     
-    let newText = document.createTextNode(newListText.value)
+    let text = document.createTextNode(taskText.value)
 
-    newListObj.appendChild(newCheckbox)
-    newListObj.appendChild(newText)
-    listId.appendChild(newListObj)
+    listObj.appendChild(checkbox)
+    listObj.appendChild(text)
+    list.appendChild(listObj)
 
     // Local storage
-    todosArr.push(newListObj.innerHTML)
-    localStorage.setItem("todos", JSON.stringify(todosArr))
+    todosObj.push(listObj.innerHTML)
+    localStorage.setItem("todos", JSON.stringify(todosObj))
 
-    newListText.value = null
+    taskText.value = null
 }
 
 window.onload=function()
 {
-    listId.innerHTML = ''
+    list.innerHTML = ''
 
     if(todos)
     {
         for(let i = 0; i < todos.length; i++)
         {      
-            listId.innerHTML += `${todos[i]}`
+            list.innerHTML += `${todos[i]}`
         }
     }
 }
