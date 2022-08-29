@@ -32,7 +32,7 @@ h1{
     text-align: center;
     border-radius: 1rem;    
     max-width: 75rem;
-    margin: auto auto;
+    margin: 3.5vw auto auto;
 }
 
 #create-task-text
