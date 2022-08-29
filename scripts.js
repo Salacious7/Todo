@@ -14,7 +14,7 @@ button.addEventListener('click', AddTask)
 taskText.addEventListener('keypress', function(e)
 {
     if (e.key === "Enter") 
-        AddTask
+        AddTask()
 })
 
 function AddTask()
