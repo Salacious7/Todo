@@ -7,7 +7,7 @@ let inputs = JSON.parse(localStorage.getItem("inputs"))
 let todosObj = []
 let checkObj = []
 
-if (localStorage.getItem('todos')) 
+if (localStorage.getItem('todos'))
     todosObj = JSON.parse(localStorage.getItem('todos'))
 
 if (localStorage.getItem('inputs'))
@@ -25,7 +25,7 @@ function SaveCheckboxes()
 {
     let inputs = JSON.parse(localStorage.getItem('inputs'))
 
-    for(let i = 0; i < checkObj.length; i++)
+    for (let i = 0; i < checkObj.length; i++)
         checkObj[i].checked = document.getElementById(inputs[i].id).checked
 
     localStorage.setItem('inputs', JSON.stringify(checkObj))
@@ -36,7 +36,7 @@ function LoadCheckboxes()
 
     let inputs = JSON.parse(localStorage.getItem('inputs'))
 
-    for(let i = 0; i < inputs.length; i++)
+    for (let i = 0; i < inputs.length; i++)
         document.getElementById(inputs[i].id).checked = inputs[i].checked
 }
 
@@ -54,8 +54,8 @@ function AddTask()
     checkbox.type = 'checkbox'
     checkbox.id = (JSON.parse(localStorage.getItem('inputs'))) ? 'task-check' + JSON.parse(localStorage.getItem('inputs')).length : 'task-check' + 0
     checkbox.addEventListener('click', SaveCheckboxes)
-    checkObj.push({id: checkbox.id, checked: false})
-    
+    checkObj.push({ id: checkbox.id, checked: false })
+
     listObj.appendChild(checkbox)
 
     let text = document.createTextNode(taskText.value)
@@ -98,13 +98,13 @@ window.onload = function ()
         for (let i = 0; i < todos.length; i++)
             list.innerHTML += `<li id="task">${todos[i]}</li>`
 
-    if(localStorage.getItem('inputs'))
+    if (localStorage.getItem('inputs'))
     {
         let inputs = JSON.parse(localStorage.getItem("inputs"))
 
         LoadCheckboxes()
 
-        for(let i = 0; i < inputs.length; i++)
+        for (let i = 0; i < inputs.length; i++)
             document.getElementById(inputs[i].id).addEventListener('click', SaveCheckboxes)
     }
 }
