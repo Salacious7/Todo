@@ -17,8 +17,7 @@ clear.addEventListener('click', ClearTasks)
 button.addEventListener('click', AddTask)
 taskText.addEventListener('keypress', function (e)
 {
-    if (e.key === "Enter")
-        AddTask()
+    if (e.key === "Enter") AddTask()
 })
 
 function SaveCheckboxes()
@@ -33,7 +32,6 @@ function SaveCheckboxes()
 
 function LoadCheckboxes()
 {
-
     let inputs = JSON.parse(localStorage.getItem('inputs'))
 
     for (let i = 0; i < inputs.length; i++)
@@ -42,8 +40,7 @@ function LoadCheckboxes()
 
 function AddTask()
 {
-    if (taskText.value == '')
-        return
+    if (taskText.value == '') return
 
     taskText.value = taskText.value.charAt(0).toUpperCase() + taskText.value.slice(1)
 
@@ -52,7 +49,7 @@ function AddTask()
 
     let checkbox = document.createElement('input')
     checkbox.type = 'checkbox'
-    checkbox.id = (JSON.parse(localStorage.getItem('inputs'))) ? 'task-check' + JSON.parse(localStorage.getItem('inputs')).length : 'task-check' + 0
+    checkbox.id = (JSON.parse(localStorage.getItem('inputs')))? 'task-check' + JSON.parse(localStorage.getItem('inputs')).length : 'task-check' + 0
     checkbox.addEventListener('click', SaveCheckboxes)
     checkObj.push({ id: checkbox.id, checked: false })
 
