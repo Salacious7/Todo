@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
-        "target": "ES6",
+        "target": "ES5",
         "module": "commonjs",
-        "lib": ["ES5", "DOM", "es2017", "ES6"]
+        "lib": ["DOM", "es2017", "ES6", "ES2015"]
     },
     "exclude": [
         "node_modules"
