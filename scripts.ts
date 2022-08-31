@@ -21,6 +21,9 @@ if (localStorage.getItem('tasks'))
 function UpdateCheckbox(e: HTMLInputElement): void
 {
     let checkbox = taskData.find(task => task.id === e.dataset.id)
+    if (taskData === undefined) {
+        throw new TypeError('The value was promised to always be there!');
+      }
     checkbox.checked = !checkbox.checked
     localStorage.setItem("tasks", JSON.stringify(taskData))
 }
@@ -55,6 +58,9 @@ function SaveTaskText(span, task): void
     }
 
     let toEdit = taskData.find(task => task.id === id);
+    if (taskData === undefined) {
+        throw new TypeError('The value was promised to always be there!');
+      }
     toEdit.value = span.innerHTML;
 
     localStorage.setItem("tasks", JSON.stringify(taskData));
@@ -64,6 +70,9 @@ function DeleteTask(task): void
 {
     let id = task.querySelector("[type='checkbox']").dataset.id;
     let toRemove = taskData.find(task => task.id === id);
+    if (taskData === undefined) {
+        throw new TypeError('The value was promised to always be there!');
+      }
     taskData.splice(taskData.indexOf(toRemove), 1);
     localStorage.setItem("tasks", JSON.stringify(taskData));
     LoadTasks();
