@@ -36,26 +36,36 @@ function LoadTasks()
     {
         list.innerHTML += `<li class="task">
         <input type="checkbox" onclick=UpdateCheckbox(this) data-id="${tasks[i].id}" ${tasks[i].checked ? 'checked' : '' }>
-        <span>${tasks[i].value}</span>
-        <input type="button" class="deleteButton" onclick="Delete(this.parentElement)">
-        <input type="button" class="edit">
+        <span onkeydown="SaveTaskText(this, this.parentElement)" onkeyup="SaveTaskText(this, this.parentElement)" contenteditable="true">${tasks[i].value}</span>
+        <input type="button" class="deleteButton" onclick="DeleteTask(this.parentElement)">
         </li>`
     }
 }
 
-function Delete(e)
+function SaveTaskText(span, task)
 {
-    let tasks = JSON.parse(localStorage.getItem("tasks"))
+    let id = task.querySelector("[type='checkbox']").dataset.id
 
-    taskData.splice(taskData.indexOf(e.innerHTML), 1)
-    let checkbox = e.querySelector('input[type=checkbox]')
-    checkObj.splice(checkbox.id[checkbox.id.length - 1] , 1)
-    
-    
+    if(span.innerHTML == '')
+    {
+        DeleteTask(task)
+        localStorage.setItem("tasks", JSON.stringify(taskData))
+        return
+    }
+
+    let toEdit = taskData.find(task => task.id === id)
+    toEdit.value = span.innerHTML
 
     localStorage.setItem("tasks", JSON.stringify(taskData))
-    UpdateCheckbox()
-    e.remove()
+}
+
+function DeleteTask(task)
+{
+    let id = task.querySelector("[type='checkbox']").dataset.id
+    let toRemove = taskData.find(task => task.id === id)
+    taskData.splice(taskData.indexOf(toRemove), 1)
+    localStorage.setItem("tasks", JSON.stringify(taskData))
+    LoadTasks()
 }
 
 function AddTask()
