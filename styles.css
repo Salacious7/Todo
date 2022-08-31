@@ -86,7 +86,7 @@ body
     font-size: 24px;
 }
 
-#task
+.task
 {
     padding: .5rem;
     color: cyan;
